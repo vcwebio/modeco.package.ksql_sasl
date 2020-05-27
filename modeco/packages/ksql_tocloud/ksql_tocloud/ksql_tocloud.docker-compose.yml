@@ -1,0 +1,30 @@
+---
+version: '3'
+services:
+
+# START SERVICE ksql_server.tocloud
+  ksql_server:
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.ksql_server.tocloud:5.4.0
+    environment: ['KSQL_KSQL_SERVICE_ID=${KSQL_TOCLOUD_KSQL_KSQL_SERVICE_ID}','KSQL_COMMIT_INTERVAL_MS=0','KSQL_CACHE_MAX_BYTES_BUFFERING=0','KSQL_KSQL_STREAMS_PRODUCER_RETRIES=2147483647','KSQL_KSQL_STREAMS_PRODUCER_CONFLUENT_BATCH_EXPIRE_MS=9223372036854775807','KSQL_KSQL_STREAMS_PRODUCER_REQUEST_TIMEOUT_MS=300000','KSQL_KSQL_STREAMS_PRODUCER_MAX_BLOCK_MS=9223372036854775807','KSQL_KSQL_STREAMS_REPLICATION_FACTOR=3','KSQL_KSQL_INTERNAL_TOPIC_REPLICAS=3','KSQL_KSQL_SINK_REPLICAS=3','KSQL_BOOTSTRAP_SERVERS=${KSQL_TOCLOUD_ENVIRONMENT_CLOUD_BOOTSTRAP_SERVERS}','KSQL_SECURITY_PROTOCOL=SASL_SSL','KSQL_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="${KSQL_TOCLOUD_ENVIRONMENT_SASL_JAAS_CONFIG_CLUSTER_API_KEY}" password="${KSQL_TOCLOUD_ENVIRONMENT_SASL_JAAS_CONFIG_CLUSTER_API_SECRET}";','KSQL_SASL_MECHANISM=PLAIN','KSQL_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM=HTTPS','KSQL_PRODUCER_INTERCEPTOR_CLASSES=io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor','KSQL_CONSUMER_INTERCEPTOR_CLASSES=io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor'${KSQL_TOCLOUD_MODE}]
+    command: []
+    volumes: [package_ksql_tocloud_ksql_server_volume:/conteco/pwd]
+    ports: [${KSQL_TOCLOUD_PORTS}]
+    networks: [package_overlay]
+    deploy:
+      mode: replicated
+      replicas: ${KSQL_TOCLOUD_DEPLOY_REPLICAS}
+      resources:
+        limits:
+          cpus: '${KSQL_TOCLOUD_DEPLOY_RESOURCES_LIMITS_CPUS}'
+          memory: '${KSQL_TOCLOUD_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          cpus: '${KSQL_TOCLOUD_DEPLOY_RESOURCES_RESERVATIONS_CPUS}'
+          memory: '${KSQL_TOCLOUD_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+      placement:
+        constraints: [${KSQL_TOCLOUD_DEPLOY_PLACEMENT_CONSTRAINTS}]
+      labels: [${KSQL_TOCLOUD_DEPLOY_LABELS}]
+    labels: [${KSQL_TOCLOUD_LABELS}]
+# END SERVICE ksql_server.tocloud
+
+volumes: {package_ksql_tocloud_ksql_server_volume: { external: true }}
+networks: {package_overlay: { external: true }}

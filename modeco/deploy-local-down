@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+
+prefix="package_$2"
+
+
+executionplane --silent docker container prune --force
+
+if [[ "package_ksql_ksql_server_volume" == "$prefix"* ]] ; then
+		continue="true"
+		while [[ "true" == "$continue" ]] ;
+		do
+			executionplane docker volume rm "package_ksql_ksql_server_volume"
+			result=$(docker volume ls | grep "package_ksql_ksql_server_volume")
+			if [[ "$result" == "" ]] ; then
+				continue="false"
+			else
+				sleep 3;
+			fi
+		done;
+	fi
+	
+if [[ "package_ksql_tocloud_ksql_server_volume" == "$prefix"* ]] ; then
+		continue="true"
+		while [[ "true" == "$continue" ]] ;
+		do
+			executionplane docker volume rm "package_ksql_tocloud_ksql_server_volume"
+			result=$(docker volume ls | grep "package_ksql_tocloud_ksql_server_volume")
+			if [[ "$result" == "" ]] ; then
+				continue="false"
+			else
+				sleep 3;
+			fi
+		done;
+	fi
+	

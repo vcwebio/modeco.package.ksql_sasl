@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+export CONTECO_LABEL="package.ksql - ModEco"
+export CONTECO_DESCRIPTION="The ModEco ksql module package."
+
+export CONTECO_TYPE="package"
+export CONTECO_NAME="ksql_tocloud"
+export CONTECO_TAG="5.4.0"
+export CONTECO_TAG_TYPE="incremental"
+
+export CONTECO_BASE="image.wrapper"
+export CONTECO_BUILD="modeco"
