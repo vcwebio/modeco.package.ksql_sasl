@@ -1,6 +1,6 @@
-# `package.ksql` - ModEco
+# `package.ksql_sasl` - ModEco
 
-The ModEco ksql module package.  
+The ModEco KSQL package, with SASL authentication.  
 See `conteco.docs.overview` for more information on the ModEco ecosystem.
 
 This package a KSQL server instance to be used with Kafka.  
