@@ -3,7 +3,7 @@
 
 prefix="package_$2"
 
-if [[ "package_ksql_sasl_ksql_server_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create package_ksql_sasl_ksql_server_volume
+if [[ "_ksql_server_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create _ksql_server_volume
 	fi
 	
