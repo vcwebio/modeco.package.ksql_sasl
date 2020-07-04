@@ -6,7 +6,7 @@ export CONTECO_DESCRIPTION="The ModEco Confluent KSQL package, with SASL authent
 export CONTECO_TYPE="package"
 export CONTECO_NAME="ksql_sasl"
 export CONTECO_TAG="5.4.0"
-export CONTECO_TAG_TYPE="incremental"
+
 
 export CONTECO_BASE="image.wrapper"
 export CONTECO_BUILD="modeco"
